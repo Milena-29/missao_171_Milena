@@ -164,19 +164,47 @@ describe("Testes da Função converterCelsiusParaFahrenheit()", () => {
 
 });
 
-// Questão 6 
+// Questão 6
 
-describe("", () =>{
+describe("Testes da Função calcularTotal()", () => {
 
+    test("Teste A: deve calcular o total corretamente", () => {
+        expect(calcularTotal(3, 10)).toBe(30);
+    });
 
+    test("Teste B: deve retornar zero quando a quantidade for zero", () => {
+        expect(calcularTotal(0, 10)).toBe(0);
+    });
+
+    test("Teste C: deve lançar erro quando a quantidade for negativa", () => {
+        expect(() => calcularTotal(-2, 10)).toThrow("Valores inválidos");
+    });
+
+    test("Teste D: deve calcular o total com preço negativo", () => {
+        expect(calcularTotal(2, -5)).toBe(-10);
+    });
 
 });
 
 // Questão 7
 
-describe("", () =>{
+describe("Testes da Função validarSenha()", () => {
 
+    test("Teste A: deve aceitar senha com 8 caracteres", () => {
+        expect(validarSenha("abc12345")).toBe(true);
+    });
 
+    test("Teste B: deve rejeitar senha com menos de 8 caracteres", () => {
+        expect(validarSenha("abc123")).toBe(false);
+    });
+
+    test("Teste C: deve rejeitar senha com 10 caracteres", () => {
+        expect(validarSenha("abc1234567")).toBe(false);
+    });
+
+    test("Teste D: deve aceitar senha com 12 caracteres", () => {
+        expect(validarSenha("abc123456789")).toBe(true);
+    });
 
 });
 
