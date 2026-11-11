@@ -87,6 +87,28 @@ Cenário 4 – Nota válida (Reprovado):
 
 ## c) 
 
+    describe("Testes da Função verificarAprovacao()", () => {
+
+        test("Verifica se a nota é menor do que 0", () => {
+            expect(() => verificarAprovacao(-2))
+                .toThrow("Nota inválida");
+        });
+
+        test("Verifica se a nota é maior do que 10", () => {
+            expect(() => verificarAprovacao(11))
+                .toThrow("Nota inválida");
+        });
+
+        test("Verifica se a nota é válida para aprovação", () => {
+            expect(verificarAprovacao(8)).toBe("Aprovado");
+        });
+
+        test("Verifica se a nota é válida para reprovação", () => {
+            expect(verificarAprovacao(6)).toBe("Reprovado");
+        });
+
+    });
+
 
 
 ## d) 
@@ -105,29 +127,105 @@ Para que o cadastro seja considerado válido, é necessário que o nome tenha si
 
 1. Todos os dados são válidos.
 
+        test("Verificar se todos os dados são válidos", () =>{
+
+            expect(validarCadastro("Bianca", 28, "profrafa001@gmail.com")).toBe(true);
+        });
+
 2. Todos os dados são inválidos
+
+        test("Verificar se todos os dados são inválidos", () =>{
+
+            expect(validarCadastro("  ", 15, "biancaCamposgmail.com")).toBe(false);
+        });
+
 
 3. O nome está vazio.
 
-4. O nome contém apenas 
-espaços.
+        test("Verificar se o nome está vazio", () =>{
+
+            expect(validarCadastro("", 20, "biancaCampos@gmail.com")).toBe(false);
+        });
+
+4. O nome contém apenas espaços.
+
+        test("Verificar se o nome contém apenas espaços", () =>{
+
+            expect(validarCadastro("      ", 21, "biancaCampos@gmail.com")).toBe(false);
+        }); 
 
 5. A idade está vazia.
 
+        test("Verificar se a idade está vazia", () =>{
+
+            expect(validarCadastro("Bianca", 0, "profrafa001@gmail.com")).toBe(false);
+        });
+
 6. A idade está abaixo do limite permitido.
+
+        test("Verificar se a idade está abaixo do limite permitido", () =>{
+
+            expect(validarCadastro("Bianca", 12, "biancaCampos@gmail.com")).toBe(false);
+        });
 
 7. A idade está acima do limite permitido.
 
+        test("Verificar se a idade está acima do limite permitido", () =>{
+
+            expect(validarCadastro("Bianca", 102, "carlaRodrigues@gmail.com")).toBe(false);
+        });
+
 8. O e-mail está vazio.
+
+        test("Verificar se o e-mail está vazio", () =>{
+
+            expect(validarCadastro("Bianca", 25, "")).toBe(false);
+        });
 
 9. O e-mail não contém o caractere @.
 
+        test("Verificar se o e-mail não contém o caractere @", () =>{
+
+            expect(validarCadastro("Bianca", 35, "biancaCamposgmail.com")).toBe(false);
+        });
+
 ## c) 
+
+Se apenas um dos três dados informados for inválido, a função retorna false, mesmo que os outros dois estejam corretos. Isso acontece porque todos os dados precisam atender às condições estabelecidas para que o cadastro seja considerado válido.
+
 
 # Questão 4 
 
 
 ## a) 
+
+    describe("Testes da Função calcularFrete()", () => {
+
+        test("Caso 1: valor da compra é 250 e a distância é 10 e resultado esperado é 0", () => {
+            expect(calcularFrete(250, 10)).toBe(0);
+        });
+
+        test("Caso 2: valor da compra é 100 e a distância é 10 e resultado esperado é 20", () => {
+            expect(calcularFrete(100, 10)).toBe(20);
+        });
+
+        test("Caso 3: valor da compra é 200 e a distância é 5 e resultado esperado é 0", () => {
+            expect(calcularFrete(200, 5)).toBe(0);
+        });
+
+        test("Caso 4: valor da compra é 0 e a distância é 10 e resultado esperado é 20", () => {
+            expect(calcularFrete(0, 10)).toBe(20);
+        });
+
+        test("Caso 5: valor da compra é -50 e a distância é 10 e resultado esperado é erro", () => {
+            expect(() => calcularFrete(-50, 10)).toThrow("Valores inválidos");
+        });
+
+        test("Caso 6: valor da compra é 100 e a distância é -5 e resultado esperado é erro", () => {
+            expect(() => calcularFrete(100, -5)).toThrow("Valores inválidos");
+        });
+
+    });
 
 ## b) 
 
@@ -144,6 +242,36 @@ Assim, acontece porque, nesse caso, o valor da compra é exatamente R$ 200,00. D
 
 ## a) 
 
+        describe("Testes da Função converterCelsiusParaFahrenheit()", () => {
+
+            test("Caso 1: a entrada é 0°C e o resultado esperado é 32", () => {
+                expect(converterCelsiusParaFahrenheit(0)).toBe(32);
+            });
+
+            test("Caso 2: a entrada é 100°C e o resultado esperado é 212", () => {
+                expect(converterCelsiusParaFahrenheit(100)).toBe(212);
+            });
+
+            test("Caso 3: a entrada é -40°C e o resultado esperado é -40", () => {
+                expect(converterCelsiusParaFahrenheit(-40)).toBe(-40);
+            });
+
+            test("Caso 4: a entrada é 25°C e o resultado esperado é 77", () => {
+                expect(converterCelsiusParaFahrenheit(25)).toBe(77);
+            });
+
+            test("Caso 5: a entrada é '25' e o resultado esperado é um erro", () => {
+                expect(() => converterCelsiusParaFahrenheit("25"))
+                    .toThrow("A temperatura deve ser numérica");
+            });
+
+            test("Caso 6: a entrada é 'abc' e o resultado esperado é um erro", () => {
+                expect(() => converterCelsiusParaFahrenheit("abc"))
+                    .toThrow("A temperatura deve ser numérica");
+            });
+
+        });
+
 ## b) 
 
 Uma vez que a entrada é "25", ocorrerá um erro, pois as aspas ("") indicam que o tipo de dado é string, isto é, um dado de texto. Mesmo que dentro das aspas esteja um número, ele será tratado como texto, mas a função espera receber um número. Por isso, acontece o erro.
@@ -154,6 +282,8 @@ Uma vez que a entrada é "25", ocorrerá um erro, pois as aspas ("") indicam que
 
 ## a) 
 
+Testes unitários são testes realizados em pequenas partes de um sistema, como funções, para verificar se estão funcionando corretamente. Eles são importantes porque ajudam a encontrar erros, evitar problemas e garantir que o código apresente os resultados esperados.
+
 ## b) 
 
 Teste A
@@ -162,11 +292,15 @@ Teste A
         expect(calcularTotal(3, 10)).toBe(30);
     }); 
 
+O teste A passa, pois os valores da quantidade e do preço unitário são válidos: 3 e 10. O resultado é 30, que corresponde ao esperado, já que a função multiplica o preço unitário pela quantidade.
+
 Teste B
 
     test("deve retornar zero quando a quantidade for zero", () => {
         expect(calcularTotal(0, 10)).toBe(0);
     });
+
+O teste B passa, pois a quantidade é zero e o preço unitário é 10. Como a função permite quantidade igual a zero, o resultado da multiplicação é 0, que corresponde ao esperado.    
 
 Teste C
 
@@ -174,13 +308,19 @@ Teste C
         expect(() => calcularTotal(-2, 10)).toThrow("Valores inválidos");
     });
 
+O teste C passa, pois a quantidade é negativa (-2). A função identifica esse valor como inválido e lança o erro "Valores inválidos", exatamente como o teste espera.
+
 Teste D
 
     test("deve calcular o total com preço negativo", () => {
         expect(calcularTotal(2, -5)).toBe(-10);
     });
 
+O teste D falha, pois o preço unitário é negativo (-5). A função não aceita valores negativos e lança o erro "Valores inválidos". Porém, o teste espera que o resultado seja -10, o que não corresponde ao comportamento da função.
+
 ## c) 
+
+O teste D apresenta uma expectativa incompatível com o comportamento da função, pois espera que a multiplicação de 2 por -5 retorne -10. Porém, a função foi programada para não aceitar valores negativos, tanto na quantidade quanto no preço unitário. Por isso, ela lança o erro "Valores inválidos" em vez de retornar um resultado. Ou seja, a execução da função é interrompida antes de realizar a conta final.
 
 
 # Questão 7
@@ -193,11 +333,15 @@ Teste A
         expect(validarSenha("abc12345")).toBe(true);
     });
 
+O teste A passa, pois a senha possui exatamente 8 caracteres. Como a função aceita senhas com 8 caracteres ou mais, o resultado retornado é true, conforme o esperado.    
+
 Teste B
 
     test("deve rejeitar senha com menos de 8 caracteres", () => {
         expect(validarSenha("abc123")).toBe(false);
     });
+
+O teste B passa, pois a senha possui apenas 6 caracteres. Como a função verifica se a senha possui menos de 8 caracteres, ela retorna false, conforme o esperado.    
 
 Teste C
 
@@ -205,22 +349,25 @@ Teste C
         expect(validarSenha("abc1234567")).toBe(false);
     });
 
+O teste C falha, pois a senha possui 10 caracteres. Como a função aceita qualquer senha com 8 caracteres ou mais, ela retorna true. Porém, o teste espera false, causando a falha.
+
 Teste D
 
     test("deve aceitar senha com 12 caracteres", () => {
         expect(validarSenha("abc123456789")).toBe(true);
     });
 
+O teste D passa, pois a senha possui 12 caracteres. Como está dentro da condição aceita pela função, o resultado retornado é true, conforme o esperado.
+
 
 ## b) 
 
-
-
-
+O problema do teste C é que ele espera que uma senha com 10 caracteres seja rejeitada, retornando false. Porém, a função foi programada para aceitar qualquer senha que tenha 8 caracteres ou mais. Por isso, ela retorna true, tornando a expectativa do teste incompatível com o comportamento da função. Ou seja, a lógica do teste está incorreta em relação à lógica implementada na função.
 
 
 ## c) 
 
+Não. A função verifica somente a quantidade de caracteres da senha, aceitando qualquer senha que tenha 8 caracteres ou mais. Os caracteres que compõem a senha não são importantes para a função, pois ela não verifica a presença de letras maiúsculas, números ou caracteres especiais.
 
 # Questão 8
 
