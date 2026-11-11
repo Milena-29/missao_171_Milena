@@ -27,19 +27,25 @@ describe("Testes da Função calcularDesconto()", () =>{
 
 describe("Testes da Função verificarAprovacao()", () => {
 
-    test( "",() => {
+    test("Vefica se a nota é menor do que 0",() => {
 
-
-    });
-
-    test( "",() => {
-
+        expect(verificarAprovacao(-2)).toBe("Nota inválida");
 
     });
 
-    test( "",() => {
+    test("Vefica se a nota é maior do que 10",() => {
 
+        expect(verificarAprovacao(11)).toBe("Nota inválida");
+    });
 
+    test("Verifica se a nota é válida para a aprovação",() => {
+
+        expect(verificarAprovacao(8)).toBe("Aprovado");
+    });
+
+    test("Verifica se a nota é válida para a reprovação", () =>{
+
+        expect(verificarAprovacao(6)).toBe( "Reprovado");
     });
 
 
@@ -48,7 +54,53 @@ describe("Testes da Função verificarAprovacao()", () => {
 
 // Questão 3
 
-describe("", () =>{
+describe("Testes da Função validarCadastro()", () =>{
+
+    test("Verificar se todos os dados são válidos", () =>{
+
+        expect(validarCadastro()).toBe();
+    });
+
+    test("Verificar se todos os dados são inválidos", () =>{
+
+        expect(validarCadastro()).toBe();
+    }); 
+
+    test("Verificar se o nome está vazio", () =>{
+
+        expect(validarCadastro()).toBe();
+    }); 
+
+    test("Verificar se o nome contém apenas espaços", () =>{
+
+        expect(validarCadastro()).toBe();
+    }); 
+
+    test("Verificar se a idade está vazia", () =>{
+
+        expect(validarCadastro()).toBe();
+    });
+
+    test("Verificar se a idade está abaixo do limite permitido", () =>{
+
+        expect(validarCadastro()).toBe();
+    });
+
+    test("Verificar se a idade está acima do limite permitido", () =>{
+
+        expect(validarCadastro()).toBe();
+    });
+
+    test("Verificar se o e-mail está vazio", () =>{
+
+        expect(validarCadastro()).toBe();
+    });
+
+    test("Verificar se o e-mail não contém o caractere @", () =>{
+
+        expect(validarCadastro()).toBe();
+    });
+
 
 
 
@@ -56,7 +108,9 @@ describe("", () =>{
 
 // Questão 4 
 
-describe("", () =>{
+describe("Testes da Função calcularFrete()", () =>{
+    test("")
+    expect()
 
 
 
