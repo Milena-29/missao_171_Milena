@@ -3,23 +3,22 @@ const { calcularDesconto, verificarAprovacao, validarCadastro, calcularFrete, co
 
 // Questão 1 
 
-describe("Testes da Função calcularDesconto()", () =>{
+describe("Testes da Função calcularDesconto()", () => {
 
-    test("O valor ser negativo", () =>{
-        expect(calcularDesconto(-50, 10)).toBe("Dados inválidos");
-
+    test("O valor ser negativo", () => {
+        expect(() => calcularDesconto(-50, 10))
+            .toThrow("Dados inválidos");
     });
 
-    test("O percentual ser menos do que 0", () =>{
-        expect(calcularDesconto(10,-10)).toBe("Dados inválidos");
-
+    test("O percentual ser menor do que 0", () => {
+        expect(() => calcularDesconto(10, -10))
+            .toThrow("Dados inválidos");
     });
 
     test("O percentual ser maior do que 100", () => {
-        expect(calcularDesconto(5, 102)).toBe("Dados inválidos");
-
+        expect(() => calcularDesconto(5, 102))
+            .toThrow("Dados inválidos");
     });
-
 
 });
 
@@ -27,28 +26,23 @@ describe("Testes da Função calcularDesconto()", () =>{
 
 describe("Testes da Função verificarAprovacao()", () => {
 
-    test("Vefica se a nota é menor do que 0",() => {
-
-        expect(verificarAprovacao(-2)).toBe("Nota inválida");
-
+    test("Verifica se a nota é menor do que 0", () => {
+        expect(() => verificarAprovacao(-2))
+            .toThrow("Nota inválida");
     });
 
-    test("Vefica se a nota é maior do que 10",() => {
-
-        expect(verificarAprovacao(11)).toBe("Nota inválida");
+    test("Verifica se a nota é maior do que 10", () => {
+        expect(() => verificarAprovacao(11))
+            .toThrow("Nota inválida");
     });
 
-    test("Verifica se a nota é válida para a aprovação",() => {
-
+    test("Verifica se a nota é válida para aprovação", () => {
         expect(verificarAprovacao(8)).toBe("Aprovado");
     });
 
-    test("Verifica se a nota é válida para a reprovação", () =>{
-
-        expect(verificarAprovacao(6)).toBe( "Reprovado");
+    test("Verifica se a nota é válida para reprovação", () => {
+        expect(verificarAprovacao(6)).toBe("Reprovado");
     });
-
-
 
 });
 
@@ -58,47 +52,47 @@ describe("Testes da Função validarCadastro()", () =>{
 
     test("Verificar se todos os dados são válidos", () =>{
 
-        expect(validarCadastro()).toBe();
+        expect(validarCadastro("Bianca", 28, "profrafa001@gmail.com")).toBe(true);
     });
 
     test("Verificar se todos os dados são inválidos", () =>{
 
-        expect(validarCadastro()).toBe();
+        expect(validarCadastro("  ", 15, "biancaCamposgmail.com")).toBe(false);
     }); 
 
     test("Verificar se o nome está vazio", () =>{
 
-        expect(validarCadastro()).toBe();
+        expect(validarCadastro("", 20, "biancaCampos@gmail.com")).toBe(false);
     }); 
 
     test("Verificar se o nome contém apenas espaços", () =>{
 
-        expect(validarCadastro()).toBe();
+        expect(validarCadastro("      ", 21, "biancaCampos@gmail.com")).toBe(false);
     }); 
 
     test("Verificar se a idade está vazia", () =>{
 
-        expect(validarCadastro()).toBe();
+        expect(validarCadastro("Bianca", 0, "profrafa001@gmail.com")).toBe(false);
     });
 
     test("Verificar se a idade está abaixo do limite permitido", () =>{
 
-        expect(validarCadastro()).toBe();
+        expect(validarCadastro("Bianca", 12, "biancaCampos@gmail.com")).toBe(false);
     });
 
     test("Verificar se a idade está acima do limite permitido", () =>{
 
-        expect(validarCadastro()).toBe();
+        expect(validarCadastro("Bianca", 102, "carlaRodrigues@gmail.com")).toBe(false);
     });
 
     test("Verificar se o e-mail está vazio", () =>{
 
-        expect(validarCadastro()).toBe();
+        expect(validarCadastro("Bianca", 25, "")).toBe(false);
     });
 
     test("Verificar se o e-mail não contém o caractere @", () =>{
 
-        expect(validarCadastro()).toBe();
+        expect(validarCadastro("Bianca", 35, "biancaCamposgmail.com")).toBe(false);
     });
 
 
@@ -106,21 +100,67 @@ describe("Testes da Função validarCadastro()", () =>{
 
 });
 
-// Questão 4 
 
-describe("Testes da Função calcularFrete()", () =>{
-    test("")
-    expect()
+// Questão 4
 
+describe("Testes da Função calcularFrete()", () => {
 
+    test("Caso 1: valor da compra é 250 e a distância é 10 e resultado esperado é 0", () => {
+        expect(calcularFrete(250, 10)).toBe(0);
+    });
+
+    test("Caso 2: valor da compra é 100 e a distância é 10 e resultado esperado é 20", () => {
+        expect(calcularFrete(100, 10)).toBe(20);
+    });
+
+    test("Caso 3: valor da compra é 200 e a distância é 5 e resultado esperado é 0", () => {
+        expect(calcularFrete(200, 5)).toBe(0);
+    });
+
+    test("Caso 4: valor da compra é 0 e a distância é 10 e resultado esperado é 20", () => {
+        expect(calcularFrete(0, 10)).toBe(20);
+    });
+
+    test("Caso 5: valor da compra é -50 e a distância é 10 e resultado esperado é erro", () => {
+        expect(() => calcularFrete(-50, 10)).toThrow("Valores inválidos");
+    });
+
+    test("Caso 6: valor da compra é 100 e a distância é -5 e resultado esperado é erro", () => {
+        expect(() => calcularFrete(100, -5)).toThrow("Valores inválidos");
+    });
 
 });
 
-// Questão 5 
 
-describe("", () =>{
+// Questão 5
 
+describe("Testes da Função converterCelsiusParaFahrenheit()", () => {
 
+    test("Caso 1: a entrada é 0°C e o resultado esperado é 32", () => {
+        expect(converterCelsiusParaFahrenheit(0)).toBe(32);
+    });
+
+    test("Caso 2: a entrada é 100°C e o resultado esperado é 212", () => {
+        expect(converterCelsiusParaFahrenheit(100)).toBe(212);
+    });
+
+    test("Caso 3: a entrada é -40°C e o resultado esperado é -40", () => {
+        expect(converterCelsiusParaFahrenheit(-40)).toBe(-40);
+    });
+
+    test("Caso 4: a entrada é 25°C e o resultado esperado é 77", () => {
+        expect(converterCelsiusParaFahrenheit(25)).toBe(77);
+    });
+
+    test("Caso 5: a entrada é '25' e o resultado esperado é um erro", () => {
+        expect(() => converterCelsiusParaFahrenheit("25"))
+            .toThrow("A temperatura deve ser numérica");
+    });
+
+    test("Caso 6: a entrada é 'abc' e o resultado esperado é um erro", () => {
+        expect(() => converterCelsiusParaFahrenheit("abc"))
+            .toThrow("A temperatura deve ser numérica");
+    });
 
 });
 
