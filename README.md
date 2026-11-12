@@ -349,7 +349,7 @@ Teste C
         expect(validarSenha("abc1234567")).toBe(false);
     });
 
-O teste C falha, pois a senha possui 10 caracteres. Como a função aceita qualquer senha com 8 caracteres ou mais, ela retorna true. Porém, o teste espera false, causando a falha.
+O Teste C falha porque a gente passa uma senha válida (com 10 caracteres) esperando que ela seja rejeitada. Como a função aceita qualquer senha com 8 caracteres ou mais, ela vai retornar true. Como o teste espera false, ele quebra porque usou uma entrada válida para tentar testar um caso de erro.
 
 Teste D
 
