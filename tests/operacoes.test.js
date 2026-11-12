@@ -1,7 +1,9 @@
-// Importação de Módulo
-const { calcularDesconto, verificarAprovacao, validarCadastro, calcularFrete, converterCelsiusParaFahrenheit, calcularTotal, validarSenha, verificarEstoque, calcularMedia} = require("../src/operacoes.js");
 
-// Questão 1 
+// Importação de Módulo
+const { calcularDesconto, verificarAprovacao, validarCadastro, calcularFrete, converterCelsiusParaFahrenheit,
+calcularTotal, validarSenha, verificarEstoque, calcularMedia } = require("../src/operacoes.js");
+
+// Questão 1
 
 describe("Testes da Função calcularDesconto()", () => {
 
@@ -22,7 +24,7 @@ describe("Testes da Função calcularDesconto()", () => {
 
 });
 
-// Questão 2 
+// Questão 2
 
 describe("Testes da Função verificarAprovacao()", () => {
 
@@ -48,58 +50,45 @@ describe("Testes da Função verificarAprovacao()", () => {
 
 // Questão 3
 
-describe("Testes da Função validarCadastro()", () =>{
+describe("Testes da Função validarCadastro()", () => {
 
-    test("Verificar se todos os dados são válidos", () =>{
-
+    test("Verificar se todos os dados são válidos", () => {
         expect(validarCadastro("Bianca", 28, "profrafa001@gmail.com")).toBe(true);
     });
 
-    test("Verificar se todos os dados são inválidos", () =>{
-
+    test("Verificar se todos os dados são inválidos", () => {
         expect(validarCadastro("  ", 15, "biancaCamposgmail.com")).toBe(false);
-    }); 
+    });
 
-    test("Verificar se o nome está vazio", () =>{
-
+    test("Verificar se o nome está vazio", () => {
         expect(validarCadastro("", 20, "biancaCampos@gmail.com")).toBe(false);
-    }); 
+    });
 
-    test("Verificar se o nome contém apenas espaços", () =>{
-
+    test("Verificar se o nome contém apenas espaços", () => {
         expect(validarCadastro("      ", 21, "biancaCampos@gmail.com")).toBe(false);
-    }); 
+    });
 
-    test("Verificar se a idade está vazia", () =>{
-
+    test("Verificar se a idade está vazia", () => {
         expect(validarCadastro("Bianca", 0, "profrafa001@gmail.com")).toBe(false);
     });
 
-    test("Verificar se a idade está abaixo do limite permitido", () =>{
-
+    test("Verificar se a idade está abaixo do limite permitido", () => {
         expect(validarCadastro("Bianca", 12, "biancaCampos@gmail.com")).toBe(false);
     });
 
-    test("Verificar se a idade está acima do limite permitido", () =>{
-
+    test("Verificar se a idade está acima do limite permitido", () => {
         expect(validarCadastro("Bianca", 102, "carlaRodrigues@gmail.com")).toBe(false);
     });
 
-    test("Verificar se o e-mail está vazio", () =>{
-
+    test("Verificar se o e-mail está vazio", () => {
         expect(validarCadastro("Bianca", 25, "")).toBe(false);
     });
 
-    test("Verificar se o e-mail não contém o caractere @", () =>{
-
+    test("Verificar se o e-mail não contém o caractere @", () => {
         expect(validarCadastro("Bianca", 35, "biancaCamposgmail.com")).toBe(false);
     });
 
-
-
-
 });
-
 
 // Questão 4
 
@@ -130,7 +119,6 @@ describe("Testes da Função calcularFrete()", () => {
     });
 
 });
-
 
 // Questão 5
 
@@ -208,18 +196,67 @@ describe("Testes da Função validarSenha()", () => {
 
 });
 
-// Questão 8 
+// Questão 8
 
-describe("", () =>{
+describe("Testes da Função verificarEstoque()", () => {
 
+    test("Teste A: deve aprovar pedido quando há estoque suficiente", () => {
+        expect(verificarEstoque(20, 5)).toBe("Pedido aprovado");
+    });
 
+    test("Teste B: deve informar estoque insuficiente", () => {
+        expect(verificarEstoque(5, 10)).toBe("Estoque insuficiente");
+    });
+
+    test("Teste C: deve aprovar pedido com quantidade igual ao estoque", () => {
+        expect(verificarEstoque(10, 10)).toBe("Pedido aprovado");
+    });
+
+    test("Teste D: deve retornar estoque insuficiente para quantidade zero", () => {
+        expect(verificarEstoque(10, 0)).toBe("Estoque insuficiente");
+    });
+
+    test("Teste E: deve lançar erro para quantidade negativa", () => {
+        expect(() => verificarEstoque(10, -2))
+            .toThrow("Quantidade inválida");
+    });
 
 });
 
-// Questão 9 
+// Questão 9
 
-describe("", () =>{
+describe("Testes da Função calcularMedia()", () => {
 
+    test("Teste 1: deve calcular a média corretamente", () => {
+        expect(calcularMedia(8, 6)).toBe(7);
+    });
 
+    test("Teste 2: deve retornar 10 quando as duas notas forem 10", () => {
+        expect(calcularMedia(10, 10)).toBe(10);
+    });
+
+    test("Teste 3: deve aceitar nota igual a zero", () => {
+        expect(calcularMedia(0, 8)).toBe(4);
+    });
+
+    test("Teste 4: deve calcular a média com nota negativa", () => {
+        expect(calcularMedia(-1, 8)).toBe(3.5);
+    });
+
+    test("Teste 5: deve calcular a média com nota maior que 10", () => {
+        expect(calcularMedia(5, 15)).toBe(10);
+    });
+
+    test("Teste 6: as duas notas são iguais a zero", () => {
+        expect(calcularMedia(0, 0)).toBe(0);
+    });
+
+    test("Teste 7: uma nota é 10 e a outra é zero", () => {
+        expect(calcularMedia(10, 0)).toBe(5);
+    });
+
+    test("Teste 8: a segunda nota é negativa", () => {
+        expect(() => calcularMedia(8, -1)).toThrow("Notas inválidas");
+    });
 
 });
