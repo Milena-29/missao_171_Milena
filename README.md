@@ -379,7 +379,7 @@ Teste A
         expect(verificarEstoque(20, 5)).toBe("Pedido aprovado");
     });
 
-
+O teste A passa, pois a entrada da quantidadeSolicitada é válida, isto é, é maior que 0. Além disso, o estoque é maior que a quantidade solicitada. Por isso, a função retorna "Pedido aprovado", conforme o esperado.
 
 Teste B
 
@@ -387,12 +387,15 @@ Teste B
         expect(verificarEstoque(5, 10)).toBe("Estoque insuficiente");
     });
 
+O teste B passa, pois a lógica do teste é verificar se a função informa que o estoque é insuficiente. Como foram solicitadas 10 unidades e existem apenas 5 em estoque, a função retorna "Estoque insuficiente", conforme o esperado. Portanto, mesmo sendo uma situação de estoque insuficiente, o teste passa porque esse é exatamente o resultado esperado.
+
 Teste C
 
     test("deve aprovar pedido com quantidade igual ao estoque", () => {
         expect(verificarEstoque(10, 10)).toBe("Pedido aprovado");
     });
 
+O teste C passa, pois a quantidade solicitada é válida e igual ao estoque disponível (10 unidades). Como a quantidade solicitada não é maior que o estoque, a função retorna "Pedido aprovado", conforme o esperado.
 
 Teste D
 
@@ -400,6 +403,14 @@ Teste D
     test("deve retornar estoque insuficiente para quantidade zero", () => {
         expect(verificarEstoque(10, 0)).toBe("Estoque insuficiente");
     });
+
+O teste D falha porque a quantidade solicitada é igual a 0. Quando isso acontece, a função entra na condição:
+
+        if (quantidadeSolicitada <= 0) {
+        throw new Error("Quantidade inválida");
+    }
+
+Portanto, a função lança o erro "Quantidade inválida" e interrompe a execução antes de verificar se o estoque é suficiente. Assim, a expectativa do teste está incorreta, pois ele espera "Estoque insuficiente" em vez de "Quantidade inválida".
 
 
 Teste E
@@ -409,10 +420,15 @@ Teste E
             .toThrow("Quantidade inválida");
     });
 
+O teste E passa, pois a quantidade solicitada é negativa (-2). Quando isso acontece, a função identifica que o valor é inválido, entra na condição quantidadeSolicitada <= 0 e lança o erro "Quantidade inválida". Como esse é exatamente o erro esperado pelo teste, ele passa.    
+
 ## b) 
 
+O teste C deve passar porque a função verifica se a quantidade solicitada é maior que o estoque disponível. Como os dois valores são iguais (10 e 10), essa condição não é verdadeira. Por isso, a função não retorna "Estoque insuficiente" e segue para a última instrução, retornando "Pedido aprovado", conforme o esperado.
 
 ## c) 
+
+O problema do teste D é que ele espera que a função retorne "Estoque insuficiente" quando a quantidade solicitada é igual a zero. Porém, a função possui uma condição que não permite quantidades menores ou iguais a zero. Por isso, quando recebe o valor 0, a função lança o erro "Quantidade inválida" e interrompe a execução antes de verificar a disponibilidade do estoque. Portanto, a expectativa do teste está incorreta, pois deveria verificar uma exceção em vez de esperar uma mensagem de retorno.
 
 # Questão 9
 
@@ -437,8 +453,29 @@ Teste E
         expect(calcularMedia(5, 15)).toBe(10);
     });
 
+O teste 1 passa, pois as duas notas são maiores que 0 e não ultrapassam 10. Além disso, o resultado esperado (7) é compatível com o cálculo da média das duas notas.
+
+O teste 2 passa, pois as duas notas cumprem as condições para serem consideradas válidas. Além disso, a média calculada é 10, conforme o resultado esperado.
+
+O teste 3 passa, pois as duas notas estão dentro dos limites permitidos pela função. A primeira nota é 0 e a segunda é 8. A média calculada é 4, exatamente como o teste espera.
+
+O teste 4 falha, uma vez que a primeira nota não cumpre as condições para ser considerada válida. A entrada é -1, um número negativo, e a função determina que notas negativas são inválidas. Nesse caso, a função lança o erro "Notas inválidas" em vez de retornar 3.5, como o teste espera.
+
+O teste 5 falha, pois a segunda nota é incompatível com as condições de validade determinadas pela função, ou seja, é maior que 10, nesse caso, 15. Isso faz com que a função lance o erro "Notas inválidas" em vez de retornar 10, como o teste espera. 
+
+
 
 ## b) 
 
+    test("Teste 6: as duas notas são iguais a zero", () => {
+        expect(calcularMedia(0, 0)).toBe(0);
+    });
 
+    test("Teste 7: uma nota é 10 e a outra é zero", () => {
+        expect(calcularMedia(10, 0)).toBe(5);
+    });
+
+    test("Teste 8: a segunda nota é negativa", () => {
+        expect(() => calcularMedia(8, -1)).toThrow("Notas inválidas");
+    });
 
